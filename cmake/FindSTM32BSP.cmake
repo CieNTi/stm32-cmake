@@ -10,8 +10,8 @@ IF(STM32_FAMILY STREQUAL "F4")
 		SET(BSP_HEADERS stm32f429i_discovery.h)
 		SET(BSP_SRC stm32f429i_discovery.c)
 	ENDIF()
-	set(COMMON_COMPONENTS ampire480272
-			      ampire640480
+	# Removed components because no .c file: ampire480272, ampire640480, n25q256a
+	set(COMMON_COMPONENTS 
 			      cs43l22
 			      exc7200
 			      ili9325
@@ -21,7 +21,6 @@ IF(STM32_FAMILY STREQUAL "F4")
 			      lis3dsh
 			      lsm303dlhc
 			      mfxstm32l152
-			      n25q256a
 			      ov2640
 			      s5k5cag
 			      st7735
