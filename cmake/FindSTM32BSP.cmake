@@ -1,3 +1,21 @@
+IF(STM32_FAMILY STREQUAL "F1")
+	IF(STM_BOARD STREQUAL "STM32F1xx_Nucleo")
+		SET(BSP_HEADERS stm32f1xx_nucleo.h)
+		SET(BSP_SRC stm32f1xx_nucleo.c)
+	ENDIF()
+	set(COMMON_COMPONENTS ak4343
+			      cs43l22
+			      hx8347d
+			      ili9320
+			      ili9325
+			      lis302dl
+			      spfd5408
+			      st7735
+			      stlm75
+			      stmpe811
+			      )
+ENDIF()
+
 IF(STM32_FAMILY STREQUAL "F4")
 	IF(STM_BOARD STREQUAL "STM32F429I-Discovery")
 		SET(BSP_COMPONENTS eeprom
@@ -10,8 +28,8 @@ IF(STM32_FAMILY STREQUAL "F4")
 		SET(BSP_HEADERS stm32f429i_discovery.h)
 		SET(BSP_SRC stm32f429i_discovery.c)
 	ENDIF()
-	set(COMMON_COMPONENTS ampire480272
-			      ampire640480
+	# Removed components because no .c file: ampire480272, ampire640480, n25q256a
+	set(COMMON_COMPONENTS 
 			      cs43l22
 			      exc7200
 			      ili9325
@@ -21,7 +39,6 @@ IF(STM32_FAMILY STREQUAL "F4")
 			      lis3dsh
 			      lsm303dlhc
 			      mfxstm32l152
-			      n25q256a
 			      ov2640
 			      s5k5cag
 			      st7735
@@ -33,11 +50,14 @@ IF(STM32_FAMILY STREQUAL "F4")
 ENDIF()
 
 IF(NOT STM32BSP_FIND_COMPONENTS)
-	SET(STM32BSP_FIND_COMPONENTS ${BSP_COMPONENTS} ${COMMON_COMPONENTS})
-	MESSAGE(STATUS "No STM32BSP components selected, using all: ${STM32BSP_FIND_COMPONENTS}")
+	SET(STM32BSP_FIND_COMPONENTS)
+	MESSAGE(STATUS "No STM32BSP components selected")
 ENDIF()
 
-
+IF(STM32BSP_FIND_COMPONENTS STREQUAL "ALL")
+	SET(STM32BSP_FIND_COMPONENTS ${BSP_COMPONENTS} ${COMMON_COMPONENTS})
+	MESSAGE(STATUS "All STM32BSP components selected: ${STM32BSP_FIND_COMPONENTS}")
+ENDIF()
 
 FOREACH(cmp ${STM32BSP_FIND_COMPONENTS})
 	LIST(FIND BSP_COMPONENTS ${cmp} STM32BSP_FOUND_INDEX)
