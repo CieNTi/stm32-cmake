@@ -1,3 +1,21 @@
+IF(STM32_FAMILY STREQUAL "F1")
+	IF(STM_BOARD STREQUAL "STM32F1xx_Nucleo")
+		SET(BSP_HEADERS stm32f1xx_nucleo.h)
+		SET(BSP_SRC stm32f1xx_nucleo.c)
+	ENDIF()
+	set(COMMON_COMPONENTS ak4343
+			      cs43l22
+			      hx8347d
+			      ili9320
+			      ili9325
+			      lis302dl
+			      spfd5408
+			      st7735
+			      stlm75
+			      stmpe811
+			      )
+ENDIF()
+
 IF(STM32_FAMILY STREQUAL "F4")
 	IF(STM_BOARD STREQUAL "STM32F429I-Discovery")
 		SET(BSP_COMPONENTS eeprom
