@@ -27,6 +27,9 @@ IF(STM32_FAMILY STREQUAL "F4")
 		SET(BSP_PREFIX stm32f429i_discovery_)
 		SET(BSP_HEADERS stm32f429i_discovery.h)
 		SET(BSP_SRC stm32f429i_discovery.c)
+	ELSEIF(STM_BOARD STREQUAL "STM32F4xx-Nucleo")
+		SET(BSP_HEADERS stm32f4xx_nucleo.h)
+		SET(BSP_SRC stm32f4xx_nucleo.c)
 	ENDIF()
 	# Removed components because no .c file: ampire480272, ampire640480, n25q256a
 	set(COMMON_COMPONENTS 
